@@ -1,11 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
-Supprimerait .gitignore
-Supprimerait .gradle/
-Supprimerait .idea/
-Supprimerait build/
-Supprimerait gradle/
-Supprimerait gradlew
-Supprimerait gradlew.bat
-Supprimerait out/
-Supprimerait src/main/resources/
-Supprimerait src/test/resources/
+.gradle/
+.idea/
+build/
+gradle/
+gradlew
+gradlew.bat
+out/
