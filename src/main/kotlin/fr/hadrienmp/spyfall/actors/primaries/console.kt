@@ -1,6 +1,6 @@
-package fr.hadrienmp.spyfall.uis
+package fr.hadrienmp.spyfall.actors.primaries
 
-import fr.hadrienmp.spyfall.datasources.HardCodedLocations
+import fr.hadrienmp.spyfall.actors.secondaries.HardCodedLocations
 import fr.hadrienmp.spyfall.domain.Game
 import fr.hadrienmp.spyfall.domain.Player
 

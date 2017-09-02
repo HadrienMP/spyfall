@@ -1,4 +1,4 @@
-package fr.hadrienmp.spyfall.datasources
+package fr.hadrienmp.spyfall.actors.secondaries
 
 import fr.hadrienmp.spyfall.domain.Location
 import fr.hadrienmp.spyfall.domain.Locations
