@@ -1,30 +1,51 @@
 package fr.hadrienmp.spyfall.domain
 
+import fr.hadrienmp.spyfall.datasources.Location
+import fr.hadrienmp.spyfall.datasources.SingleLocation
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.Test
 
-object GameShould {
-    @Test fun `designates a spy and gives the location to other player`() {
-        val location = Location("Beach")
+class GameShould {
 
-        val players = listOf(
-                Player("1"),
-                Player("2"),
-                Player("3"))
-
-        val game = game(location)
-                .register(players[0])
-                .register(players[1])
-                .register(players[2])
-                .start()
-
-        val cards = players.map { game.cardOf(it) }
-
-        assertThat(cards).hasSize(players.size)
-        assertThat(cards).containsOnlyOnce(spy())
-
-        val nonSpyCards = cards.filter { it != spy() }
-        assertThat(nonSpyCards).containsOnly(Card(location.name))
+    @Test(expected = AlreadyRegistered::class)
+    fun `prevent players from registering twice`() {
+        val game = aGame()
+        val player = Player("id")
+        game.register(player)
+        game.register(player)
     }
+
+    @Test
+    fun `register players in parallel without loosing players`() {
+        val game = aGame()
+        val players = (1..1000).map { Player(it.toString()) }
+
+        players.parallelStream().forEach { game.register(it) }
+
+        assertThat(game.registered()).containsOnlyElementsOf(players)
+    }
+
+    @Test
+    fun `not start a game with less than 3 players`() {
+        val game = aGame()
+        assertThatThrownBy { game.start() }
+                .isInstanceOf(NotEnoughPlayersException::class.java)
+                .hasMessage("The game cannot be started with 0 players, 3 is the minimum")
+    }
+
+    @Test
+    fun `not deal cards to unkown players`() {
+        val game = aGame()
+        (1..3).map { Player(it.toString()) }
+                .forEach { game.register(it) }
+
+        val unknownPlayer = Player("a random player")
+
+        assertThatThrownBy { game.start().cardOf(unknownPlayer) }
+                .isInstanceOf(UnkownPLayerException::class.java)
+    }
+
+    private fun aGame() =  Game(SingleLocation(Location("playa")))
 }
 

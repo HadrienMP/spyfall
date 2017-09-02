@@ -1,33 +1,50 @@
 package fr.hadrienmp.spyfall.domain
 
-fun game(location: Location): RegistrableGame {
-    return RegistrableGame(listOf(), location)
-}
+import fr.hadrienmp.spyfall.datasources.Location
+import fr.hadrienmp.spyfall.datasources.SingleLocation
+import java.util.concurrent.ConcurrentLinkedDeque
 
-open class RegistrableGame(val players: List<Player>, val location: Location) {
-    fun register(player: Player): StartableGame {
-        return StartableGame(players + player, location)
-    }
-}
+data class Player(val id: String)
 
-class StartableGame(players: List<Player>, location: Location): RegistrableGame(players, location) {
-    fun start(): StartedGame {
-        return StartedGame(players, location)
+class Game(locations: SingleLocation) {
+
+    private val players: MutableCollection<Player> = ConcurrentLinkedDeque()
+    private val location = locations.random()
+
+    fun register(player: Player) {
+        if (players.contains(player)) {
+            throw AlreadyRegistered()
+        }
+
+        players.add(player)
     }
+
+    fun registered() = players.toList()
+    fun start() = StartedGame(players.toList(), location)
 }
 
 class StartedGame(players: List<Player>, location: Location) {
-
+    private val minimumNumberOfPlayers = 3
     private val playersCards: Map<Player, Card>
 
     init {
-        val numberOfPlayers = players.size
-        val deck = Deck(numberOfPlayers, location)
-        playersCards = deck.deal(players)
+        if (players.size < minimumNumberOfPlayers)
+            throw NotEnoughPlayersException(players.size, minimumNumberOfPlayers)
+
+        val numberOfCards = players.size
+        val deck = deck(numberOfCards, location)
+        playersCards = (0 until numberOfCards).map { Pair(players[it], deck[it]) }.toMap()
     }
 
-    fun cardOf(player: Player): Card? {
-        return playersCards[player]
+    fun cardOf(player: Player): Card {
+        return playersCards.getOrElse(player) { throw UnkownPLayerException() }
     }
 }
 
+class AlreadyRegistered : RuntimeException()
+
+class NotEnoughPlayersException(numberOfPlayers: Int, minNumberOfPlayers: Int) :
+        Exception("The game cannot be started with $numberOfPlayers players, " +
+                "$minNumberOfPlayers is the minimum")
+
+class UnkownPLayerException: RuntimeException()
