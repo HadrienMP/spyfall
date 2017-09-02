@@ -1,12 +1,10 @@
 package fr.hadrienmp.spyfall.domain
 
-import fr.hadrienmp.spyfall.datasources.Location
-import fr.hadrienmp.spyfall.datasources.SingleLocation
 import java.util.concurrent.ConcurrentLinkedDeque
 
 data class Player(val id: String)
 
-class Game(locations: SingleLocation) {
+class Game(locations: Locations) {
 
     private val players: MutableCollection<Player> = ConcurrentLinkedDeque()
     private val location = locations.random()

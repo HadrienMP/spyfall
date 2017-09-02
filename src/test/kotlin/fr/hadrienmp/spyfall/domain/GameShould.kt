@@ -1,6 +1,5 @@
 package fr.hadrienmp.spyfall.domain
 
-import fr.hadrienmp.spyfall.datasources.Location
 import fr.hadrienmp.spyfall.datasources.SingleLocation
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -44,6 +43,20 @@ class GameShould {
 
         assertThatThrownBy { game.start().cardOf(unknownPlayer) }
                 .isInstanceOf(UnkownPLayerException::class.java)
+    }
+
+    @Test
+    fun `deal cards at random`() {
+        val indicesOfSpy = (1..1000).map { indexOfSpyInAGane() }.toSet()
+        assertThat(indicesOfSpy.size).isGreaterThan(1)
+    }
+
+    private fun indexOfSpyInAGane(): Int {
+        val game = aGame()
+        val players = (1..10).map { Player(it.toString()) }
+        players.forEach { game.register(it) }
+        val startedGame = game.start()
+        return players.map { startedGame.cardOf(it) }.indexOf(spy())
     }
 
     private fun aGame() =  Game(SingleLocation(Location("playa")))
