@@ -1,4 +1,4 @@
-package fr.hadrienmp.spyfall.actors.primaries
+package fr.hadrienmp.spyfall.adapters.ins
 
 import fr.hadrienmp.spyfall.actors.secondaries.HardCodedLocations
 import fr.hadrienmp.spyfall.domain.Game
@@ -9,9 +9,9 @@ fun main(args: Array<String>) {
     println("Game created : " + game)
 
     val players = listOf(
-            Player("Thomas"),
-            Player("Theo"),
-            Player("Fabien")
+            Player("Q"),
+            Player("W"),
+            Player("E")
     )
 
     players.forEach {
