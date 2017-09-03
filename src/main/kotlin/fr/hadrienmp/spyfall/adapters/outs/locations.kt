@@ -1,4 +1,4 @@
-package fr.hadrienmp.spyfall.actors.secondaries
+package fr.hadrienmp.spyfall.adapters.outs
 
 import fr.hadrienmp.spyfall.domain.Location
 import fr.hadrienmp.spyfall.domain.Locations
@@ -11,18 +11,14 @@ class HardCodedLocations: Locations {
             "Club",
             "House",
             "Cocktail Party"
-    )
-    override fun random(): Location {
-        return Location(locations.random())
-    }
+    ).map { Location(it) }
 
-    private fun <E> List<E>.random(): E {
-        return get(Random().nextInt(size))
-    }
+    override fun random() = locations.random()
+    override fun all() = locations
+    private fun <E> List<E>.random() = get(Random().nextInt(size))
 }
 
 class SingleLocation(private val location: Location) : Locations {
-    override fun random(): Location {
-        return location
-    }
+    override fun random() = location
+    override fun all() = listOf(location)
 }

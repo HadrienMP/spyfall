@@ -1,6 +1,6 @@
 package fr.hadrienmp.spyfall.adapters.ins
 
-import fr.hadrienmp.spyfall.actors.secondaries.HardCodedLocations
+import fr.hadrienmp.spyfall.adapters.outs.HardCodedLocations
 import fr.hadrienmp.spyfall.domain.Game
 import fr.hadrienmp.spyfall.domain.Player
 

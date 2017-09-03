@@ -1,6 +1,6 @@
 package fr.hadrienmp.spyfall.domain
 
-import fr.hadrienmp.spyfall.actors.secondaries.SingleLocation
+import fr.hadrienmp.spyfall.adapters.outs.SingleLocation
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
