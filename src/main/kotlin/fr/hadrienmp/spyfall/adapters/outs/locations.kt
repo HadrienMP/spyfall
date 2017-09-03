@@ -16,6 +16,10 @@ class HardCodedLocations: Locations {
     override fun random() = locations.random()
     override fun all() = locations
     private fun <E> List<E>.random() = get(Random().nextInt(size))
+    override fun toString(): String {
+        return HardCodedLocations::class.java.simpleName + " " +
+                "{locations = $locations}"
+    }
 }
 
 class SingleLocation(private val location: Location) : Locations {

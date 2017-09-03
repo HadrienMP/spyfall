@@ -15,5 +15,5 @@ class Template(templatePath: String) {
     }
 
     fun render(): String = render(mapOf())
-    fun render(mapOf: Map<String, String>): String = jinjava.render(template, mapOf)
+    fun render(mapOf: Map<String, Any>): String = jinjava.render(template, mapOf)
 }

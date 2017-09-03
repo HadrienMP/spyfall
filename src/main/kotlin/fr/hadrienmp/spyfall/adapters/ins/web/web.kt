@@ -20,7 +20,7 @@ fun main(args: Array<String>) {
     app.get("/game/start") { startGame(it) }
     app.post("/player/register") { register(it) }
     app.get("/player/card") { it.html(getCard(it)) }
-    app.get("/locations") { it.result(locations(locations)) }
+    app.get("/locations") { it.html(locations(locations)) }
 }
 
 private fun gamePage(context: Context): String {
@@ -49,8 +49,9 @@ fun getCard(context: Context): String {
     return Template("card.html").render(mapOf(Pair("card", card.content)))
 }
 
-private fun locations(locations: HardCodedLocations) =
-        locations.all().joinToString("\n") { it.name }
+private fun locations(locations: HardCodedLocations): String {
+    return Template("locations.html").render(mapOf(Pair("locations", locations.all())))
+}
 
 private fun game() = game ?: throw GameAlreadyStartedException()
 private fun startedGame() = startedGame ?: throw GameNotStartedException()

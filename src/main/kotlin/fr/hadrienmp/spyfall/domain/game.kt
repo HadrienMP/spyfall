@@ -35,14 +35,6 @@ class StartedGame(players: List<Player>, location: Location) {
     }
 
     fun cardOf(player: Player): Card {
-        return playersCards.getOrElse(player) { throw UnkownPLayerException() }
+        return playersCards.getOrElse(player) { throw UnknownPLayerException() }
     }
 }
-
-class AlreadyRegistered : RuntimeException()
-
-class NotEnoughPlayersException(numberOfPlayers: Int, minNumberOfPlayers: Int) :
-        Exception("The game cannot be started with $numberOfPlayers players, " +
-                "$minNumberOfPlayers is the minimum")
-
-class UnkownPLayerException: RuntimeException()

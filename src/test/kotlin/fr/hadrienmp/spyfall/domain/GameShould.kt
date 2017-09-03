@@ -42,7 +42,7 @@ class GameShould {
         val unknownPlayer = Player("a random player")
 
         assertThatThrownBy { game.start().cardOf(unknownPlayer) }
-                .isInstanceOf(UnkownPLayerException::class.java)
+                .isInstanceOf(UnknownPLayerException::class.java)
     }
 
     @Test
