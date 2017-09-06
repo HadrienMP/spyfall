@@ -1,36 +1,30 @@
 package fr.hadrienmp.spyfall.domain
 
-import java.util.concurrent.ConcurrentLinkedDeque
-
 data class Player(val id: String)
 
-class Game(locations: Locations) {
+fun game(locations: Locations): Game {
+    return Game(listOf(), locations)
+}
 
-    private val players: MutableCollection<Player> = ConcurrentLinkedDeque()
-    private val location = locations.random()
-
-    fun register(player: Player) {
+class Game(private val players: List<Player>, private val locations: Locations) {
+    fun register(player: Player): Game {
         if (players.contains(player)) {
             throw AlreadyRegistered()
         }
-
-        players.add(player)
+        return Game(players + player, locations)
     }
 
-    fun registered() = players.toList()
-    fun start() = StartedGame(players.toList(), location)
+    fun start(): StartedGame {
+        return StartedGame(players, locations)
+    }
 }
 
-class StartedGame(players: List<Player>, location: Location) {
-    private val minimumNumberOfPlayers = 3
+class StartedGame(players: List<Player>, locations: Locations) {
     private val playersCards: Map<Player, Card>
 
     init {
-        if (players.size < minimumNumberOfPlayers)
-            throw NotEnoughPlayersException(players.size, minimumNumberOfPlayers)
-
         val numberOfCards = players.size
-        val deck = deck(numberOfCards, location)
+        val deck = deck(numberOfCards, locations.random())
         playersCards = (0 until numberOfCards).map { Pair(players[it], deck[it]) }.toMap()
     }
 

@@ -9,9 +9,12 @@ class GameFeatures {
     @Test fun `deal cards to players`() {
         val playa = Location("playa")
 
-        val game = Game(SingleLocation(playa))
+        var game = game(SingleLocation(playa))
 
-        val players = registerSomePLayers(game)
+        val players = somePLayers()
+        for (player in players) {
+            game = game.register(player)
+        }
 
         val startedGame = game.start()
 
@@ -20,12 +23,6 @@ class GameFeatures {
         assertThat(cards).containsOnlyOnce(spy())
         assertThat(cards - spy()).containsOnly(Card(playa.name))
         assertThat(cards).hasSameSizeAs(players)
-    }
-
-    private fun registerSomePLayers(game: Game): List<Player> {
-        val players = somePLayers()
-        players.map { game.register(it) }
-        return players
     }
 
     private fun somePLayers() = (1..3).map { Player(it.toString()) }

@@ -1,11 +1,11 @@
 package fr.hadrienmp.spyfall.adapters.ins
 
 import fr.hadrienmp.spyfall.adapters.outs.HardCodedLocations
-import fr.hadrienmp.spyfall.domain.Game
 import fr.hadrienmp.spyfall.domain.Player
+import fr.hadrienmp.spyfall.domain.game
 
 fun main(args: Array<String>) {
-    val game = Game(HardCodedLocations())
+    var game = game(HardCodedLocations())
     println("Game created : " + game)
 
     val players = listOf(
@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
     )
 
     players.forEach {
-        game.register(it)
+        game = game.register(it)
         println("Player registered : " + it)
     }
 
