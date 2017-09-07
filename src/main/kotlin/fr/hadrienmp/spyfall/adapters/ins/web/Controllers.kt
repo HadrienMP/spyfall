@@ -1,5 +1,6 @@
 package fr.hadrienmp.spyfall.adapters.ins.web
 
+import fr.hadrienmp.spyfall.adapters.ins.MutableGame
 import fr.hadrienmp.spyfall.adapters.outs.HardCodedLocations
 import fr.hadrienmp.spyfall.domain.Player
 import io.javalin.Context
@@ -18,7 +19,9 @@ class LocationsCtrl(locations: HardCodedLocations) {
     }
 }
 
-class PlayerCtrl(private val game: GameAdapter) {
+class PlayerCtrl(private val game: MutableGame) {
+
+    private val template = Template("card.html")
 
     fun register(context: Context) {
         val id = context.formParam("id") ?: throw InvalidFormException()
@@ -30,16 +33,19 @@ class PlayerCtrl(private val game: GameAdapter) {
     fun displayCard(context: Context) {
         val id = context.cookie("id") ?: throw UnknownPlayerException()
         val card = game.cardOf(Player(id))
-        context.html(Template("card.html").render(mapOf(Pair("card", card.content))))
+        context.html(template.render(mapOf(Pair("card", card.content))))
     }
 }
 
-class GameCtrl(private val game: GameAdapter) {
+class GameCtrl(private val game: MutableGame) {
+
+    private val startGame = Template("start-game.html")
+    private val register = Template("register.html")
 
     fun display(context: Context) {
         val gamePage = when {
-            context.cookie("id") == null -> Template("register.html").render()
-            else -> Template("start-game.html").render()
+            context.cookie("id") == null -> register.render()
+            else -> startGame.render()
         }
         context.html(gamePage)
     }

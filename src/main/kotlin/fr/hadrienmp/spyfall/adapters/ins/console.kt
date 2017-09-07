@@ -5,7 +5,7 @@ import fr.hadrienmp.spyfall.domain.Player
 import fr.hadrienmp.spyfall.domain.game
 
 fun main(args: Array<String>) {
-    var game = game(HardCodedLocations())
+    val game = MutableGame(game(HardCodedLocations()))
     println("Game created : " + game)
 
     val players = listOf(
@@ -15,16 +15,16 @@ fun main(args: Array<String>) {
     )
 
     players.forEach {
-        game = game.register(it)
+        game.register(it)
         println("Player registered : " + it)
     }
 
-    val startedGame = game.start()
+    game.start()
 
-    println("Game started : " + startedGame)
+    println("Game started : " + game)
 
     players.forEach {
-        val card = startedGame.cardOf(it)
+        val card = game.cardOf(it)
         println("Player $it received card $card")
     }
 }

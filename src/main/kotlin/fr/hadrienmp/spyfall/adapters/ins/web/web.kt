@@ -1,12 +1,14 @@
 package fr.hadrienmp.spyfall.adapters.ins.web
 
+import fr.hadrienmp.spyfall.adapters.ins.MutableGame
 import fr.hadrienmp.spyfall.adapters.outs.HardCodedLocations
+import fr.hadrienmp.spyfall.domain.game
 import io.javalin.Javalin
 
 
 fun main(args: Array<String>) {
     val locations = HardCodedLocations()
-    val game = GameAdapter(locations)
+    val game = MutableGame(game(locations))
 
     val gameCtrl = GameCtrl(game)
     val player = PlayerCtrl(game)
