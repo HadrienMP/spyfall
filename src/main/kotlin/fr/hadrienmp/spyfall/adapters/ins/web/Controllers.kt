@@ -4,6 +4,7 @@ import fr.hadrienmp.spyfall.adapters.ins.MutableGame
 import fr.hadrienmp.spyfall.adapters.outs.HardCodedLocations
 import fr.hadrienmp.spyfall.domain.Player
 import io.javalin.Context
+import io.javalin.builder.CookieBuilder
 
 class LocationsCtrl(locations: HardCodedLocations) {
 
@@ -26,7 +27,7 @@ class PlayerCtrl(private val game: MutableGame) {
     fun register(context: Context) {
         val id = context.formParam("id") ?: throw InvalidFormException()
         game.register(Player(id))
-        context.cookie("id", id)
+        context.cookie(CookieBuilder("id", id, path = "/"))
         context.redirect("/game")
     }
 
