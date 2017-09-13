@@ -34,6 +34,10 @@ dependencies {
     testCompile "org.assertj:assertj-core:3.4.0"
 }
 
+task stage {
+    dependsOn installDist
+}
+
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
