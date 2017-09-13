@@ -15,7 +15,6 @@ class App(private val game: Game) {
         val app = Javalin.create()
                 .port(8080)
                 .requestLogLevel(LogLevel.STANDARD)
-                .enableStaticFiles("/")
         routes(app, game)
         return app
     }
