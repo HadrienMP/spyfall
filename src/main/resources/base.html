@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spyfall</title>
+    <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
+    <style>
+        body#spyfall {
+            font-family: 'Audiowide', cursive;
+            text-align: center;
+            width: 100%;
+            max-width: 200px;
+            margin: auto;
+        }
+        h1 {
+            font-size: 2.8em;
+        }
+        button {
+            font: inherit;
+        }
+    </style>
+    <meta http-equiv="refresh" content="5">
+</head>
+<body id="spyfall" class="{% block bodyClass %} {% endblock %}">
+<h1>Spyfall</h1>
+
+{% block content %} {% endblock %}
+
+</body>
+</html>
