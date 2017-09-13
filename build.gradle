@@ -6,7 +6,7 @@ buildscript {
 
     repositories {
             mavenCentral()
-        }
+    }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
@@ -18,7 +18,7 @@ mainClassName = "fr.hadrienmp.spyfall.ui.web.MainKt"
 
 repositories {
         mavenCentral()
-    }
+}
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
@@ -34,9 +34,7 @@ dependencies {
     testCompile "org.assertj:assertj-core:3.4.0"
 }
 
-task stage {
-    dependsOn installDist
-}
+task stage(dependsOn: ['build'])
 
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
