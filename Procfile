@@ -1,1 +1,1 @@
-web: ./build/install/spyfall/bin/spyfall
+web: ./build/install/spyfall/bin/spyfall port=$PORT

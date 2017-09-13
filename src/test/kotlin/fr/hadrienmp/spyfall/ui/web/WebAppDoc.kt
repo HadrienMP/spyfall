@@ -11,7 +11,7 @@ class WebAppDoc {
     private val game = Game()
 
     @Before fun setUp() {
-        app = App(game)
+        app = App(Port.default(), game)
         app!!.start()
     }
 
