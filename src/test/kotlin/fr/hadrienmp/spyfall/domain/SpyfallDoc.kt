@@ -3,7 +3,7 @@ package fr.hadrienmp.spyfall.domain
 import fr.hadrienmp.spyfall.lib.HardCodedLocations
 import fr.hadrienmp.spyfall.lib.notEmpty
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class SpyfallDoc {
 

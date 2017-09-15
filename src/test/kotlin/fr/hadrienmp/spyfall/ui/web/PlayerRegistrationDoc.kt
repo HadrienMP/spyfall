@@ -1,21 +1,20 @@
 package fr.hadrienmp.spyfall.ui.web
 
-import fr.hadrienmp.spyfall.ui.web.testutils.*
+import fr.hadrienmp.spyfall.ui.web.testutils.ServerDocTemplate
+import fr.hadrienmp.spyfall.ui.web.testutils.containsPlayers
+import fr.hadrienmp.spyfall.ui.web.testutils.displaysRegistered
 import org.assertj.core.api.Assertions
-import org.junit.Rule
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
-class PlayerRegistrationDoc {
-
-    @Rule @JvmField val serverRule = ServerRule()
+class PlayerRegistrationDoc : ServerDocTemplate() {
 
     @Test
     fun `should register a player`() {
         val playerId = "anId"
 
-        register(playerId)
+        app.register(playerId)
 
-        val gamePage = getGamePage(playerId)
+        val gamePage = app.getGamePage(playerId)
 
         gamePage.displaysRegistered(true)
         gamePage.containsPlayers(1)
@@ -26,9 +25,9 @@ class PlayerRegistrationDoc {
         val numberOfPlayers = 1000
         (1..numberOfPlayers).map { it.toString() }
                 .parallelStream()
-                .forEach { register(it) }
+                .forEach { app.register(it) }
 
-        val gamePage = getGamePage()
+        val gamePage = app.getGamePage()
 
         gamePage.containsPlayers(numberOfPlayers)
     }
@@ -37,10 +36,11 @@ class PlayerRegistrationDoc {
     fun `should not register a player with an empty id`() {
         val playerId = "  "
 
-        val registerResponse = register(playerId)
+        val registerResponse = app.register(playerId)
 
         Assertions.assertThat(registerResponse.status()).isEqualTo(302)
 
         registerResponse.didNotSetCookie("id=[^;]")
     }
 }
+
