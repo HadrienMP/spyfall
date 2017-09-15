@@ -14,6 +14,5 @@ class Template(templatePath: String) {
                 .orElse("")
     }
 
-    fun render(): String = render(mapOf())
     fun render(mapOf: Map<String, Any>): String = jinjava.render(template, mapOf)
 }

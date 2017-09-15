@@ -1,4 +1,4 @@
-package fr.hadrienmp.spyfall.ui.web
+package fr.hadrienmp.spyfall.ui.web.testutils
 
 import com.jcabi.http.Request
 import com.jcabi.http.Response
@@ -64,18 +64,6 @@ fun Document.gameStarted() {
             .isTrue()
 }
 
-
-fun Response.didNotSetCookie(regex: String) {
-    val matchingCookies = findSetCookieMatching(regex)
-    Assertions.assertThat(matchingCookies).isEmpty()
-}
-
-fun Response.didSetCookie(regex: String) {
-    val matchingCookies = findSetCookieMatching(regex)
-    Assertions.assertThat(matchingCookies).isNotEmpty()
-}
-
-private fun Response.findSetCookieMatching(regex: String): List<String> {
-    val cookies = this.headers()[HttpHeaders.SET_COOKIE].orEmpty()
-    return cookies.filter { Regex(regex).containsMatchIn(it) }
+fun Document.card(): String {
+    return this.select("#card").text()
 }
