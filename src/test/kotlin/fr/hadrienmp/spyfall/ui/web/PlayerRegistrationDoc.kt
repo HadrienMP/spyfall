@@ -4,11 +4,11 @@ import fr.hadrienmp.spyfall.ui.web.testutils.ServerDocTemplate
 import fr.hadrienmp.spyfall.ui.web.testutils.containsPlayers
 import fr.hadrienmp.spyfall.ui.web.testutils.displaysRegistered
 import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.Test
+import fr.hadrienmp.spyfall.ui.web.testutils.Doc
 
 class PlayerRegistrationDoc : ServerDocTemplate() {
 
-    @Test
+    @Doc
     fun `should register a player`() {
         val playerId = "anId"
 
@@ -20,7 +20,7 @@ class PlayerRegistrationDoc : ServerDocTemplate() {
         gamePage.containsPlayers(1)
     }
 
-    @Test
+    @Doc
     fun `should register players concurrently without loosing anyone`() {
         val numberOfPlayers = 1000
         (1..numberOfPlayers).map { it.toString() }
@@ -32,7 +32,7 @@ class PlayerRegistrationDoc : ServerDocTemplate() {
         gamePage.containsPlayers(numberOfPlayers)
     }
 
-    @Test
+    @Doc
     fun `should not register a player with an empty id`() {
         val playerId = "  "
 

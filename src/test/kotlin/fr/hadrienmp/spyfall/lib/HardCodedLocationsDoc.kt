@@ -1,10 +1,10 @@
 package fr.hadrienmp.spyfall.lib
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import fr.hadrienmp.spyfall.ui.web.testutils.Doc
 
 class HardCodedLocationsDoc {
-    @Test
+    @Doc
     fun `should give random locations`() {
         val hardCodedLocations = HardCodedLocations()
         val locations = (1..100).map { hardCodedLocations.random() }.toSet()

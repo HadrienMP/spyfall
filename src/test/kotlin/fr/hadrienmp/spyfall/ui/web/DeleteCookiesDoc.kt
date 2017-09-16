@@ -3,12 +3,12 @@ package fr.hadrienmp.spyfall.ui.web
 import com.jcabi.http.Response
 import fr.hadrienmp.spyfall.ui.web.testutils.ServerDocTemplate
 import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.Test
+import fr.hadrienmp.spyfall.ui.web.testutils.Doc
 import javax.ws.rs.core.HttpHeaders
 
 class DeleteCookiesDoc : ServerDocTemplate() {
 
-    @Test
+    @Doc
     fun `should delete the cookies of a user that is not registered`() {
 
         val gamePageResponse = app.getGamePageResponse("anId")
@@ -16,7 +16,7 @@ class DeleteCookiesDoc : ServerDocTemplate() {
         gamePageResponse.didSetCookie("id=;")
     }
 
-    @Test
+    @Doc
     fun `should delete the cookies of a user with an empty id that is not registered`() {
 
         val gamePageResponse = app.getGamePageResponse("  ")
@@ -24,7 +24,7 @@ class DeleteCookiesDoc : ServerDocTemplate() {
         gamePageResponse.didSetCookie("id=;")
     }
 
-    @Test
+    @Doc
     fun `should not delete the cookies of a user that is registered`() {
         val playerId = "anId"
         app.register(playerId)

@@ -3,11 +3,11 @@ package fr.hadrienmp.spyfall.domain
 import fr.hadrienmp.spyfall.lib.HardCodedLocations
 import fr.hadrienmp.spyfall.lib.notEmpty
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import fr.hadrienmp.spyfall.ui.web.testutils.Doc
 
 class SpyfallDoc {
 
-    @Test
+    @Doc
     fun `games contain one spy`() {
         val players = listOf(
                 Player("a".notEmpty()),
@@ -22,7 +22,7 @@ class SpyfallDoc {
         assertThat(cards).containsOnlyOnce(spy())
     }
 
-    @Test
+    @Doc
     fun `all non spy players are at the same location`() {
         val players = listOf(
                 Player("a".notEmpty()),
@@ -39,7 +39,7 @@ class SpyfallDoc {
         assertThat((cards - spy()).toSet()).hasSize(1)
     }
 
-    @Test
+    @Doc
     fun `non registered players don't get cards`() {
         val deck = Deck(listOf(), HardCodedLocations())
 
@@ -48,7 +48,7 @@ class SpyfallDoc {
         assertThat(card).isNull()
     }
 
-    @Test
+    @Doc
     fun `a player playing alone is the spy`() {
         val player = Player("a".notEmpty())
         val deck = Deck(listOf(player), HardCodedLocations())
@@ -58,7 +58,7 @@ class SpyfallDoc {
         assertThat(card).isEqualTo(spy())
     }
 
-    @Test
+    @Doc
     fun `the spy is designated by random`() {
         val indicesOfSpy = (1..20).map { findSpyIndexInAGame() }.toSet()
         assertThat(indicesOfSpy.size).isGreaterThan(1)
