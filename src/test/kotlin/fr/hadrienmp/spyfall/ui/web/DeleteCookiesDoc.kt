@@ -3,7 +3,7 @@ package fr.hadrienmp.spyfall.ui.web
 import com.jcabi.http.Response
 import fr.hadrienmp.spyfall.ui.web.testutils.ServerDocTemplate
 import org.assertj.core.api.Assertions
-import fr.hadrienmp.spyfall.ui.web.testutils.Doc
+import fr.hadrienmp.testutils.Doc
 import javax.ws.rs.core.HttpHeaders
 
 class DeleteCookiesDoc : ServerDocTemplate() {

@@ -1,4 +1,4 @@
-package fr.hadrienmp.spyfall.ui.web.testutils
+package fr.hadrienmp.testutils
 
 import org.junit.jupiter.api.Test
 

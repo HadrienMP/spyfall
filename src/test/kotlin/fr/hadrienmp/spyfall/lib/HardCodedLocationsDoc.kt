@@ -1,7 +1,7 @@
 package fr.hadrienmp.spyfall.lib
 
 import org.assertj.core.api.Assertions.assertThat
-import fr.hadrienmp.spyfall.ui.web.testutils.Doc
+import fr.hadrienmp.testutils.Doc
 
 class HardCodedLocationsDoc {
     @Doc

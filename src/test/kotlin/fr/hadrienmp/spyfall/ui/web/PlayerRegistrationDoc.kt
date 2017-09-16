@@ -4,7 +4,7 @@ import fr.hadrienmp.spyfall.ui.web.testutils.ServerDocTemplate
 import fr.hadrienmp.spyfall.ui.web.testutils.containsPlayers
 import fr.hadrienmp.spyfall.ui.web.testutils.displaysRegistered
 import org.assertj.core.api.Assertions
-import fr.hadrienmp.spyfall.ui.web.testutils.Doc
+import fr.hadrienmp.testutils.Doc
 
 class PlayerRegistrationDoc : ServerDocTemplate() {
 

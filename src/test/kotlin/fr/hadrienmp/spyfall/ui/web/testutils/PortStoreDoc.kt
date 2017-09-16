@@ -2,16 +2,18 @@ package fr.hadrienmp.spyfall.ui.web.testutils
 
 import fr.hadrienmp.spyfall.ui.web.Port
 import org.assertj.core.api.Assertions.assertThat
-import fr.hadrienmp.spyfall.ui.web.testutils.Doc
+import fr.hadrienmp.testutils.Doc
 
 class PortStoreDoc {
 
-    @Doc fun `should return default port when first called`() {
+    @Doc
+    fun `should return default port when first called`() {
         val freePort = PortStore().get()
         assertThat(freePort).isEqualTo(Port.default())
     }
 
-    @Doc fun `should return different ports each time it is called`() {
+    @Doc
+    fun `should return different ports each time it is called`() {
         val portStore = PortStore()
         val nbPortsWanted = 10
 
@@ -20,7 +22,8 @@ class PortStoreDoc {
         assertThat(ports).hasSize(nbPortsWanted)
     }
 
-    @Doc fun `should return freed port`() {
+    @Doc
+    fun `should return freed port`() {
         // GIVEN
         val portStore = PortStore()
         val freedPort = portStore.get()
@@ -33,7 +36,8 @@ class PortStoreDoc {
         assertThat(port).isEqualTo(freedPort)
     }
 
-    @Doc fun `should not return a used port after freeing one`() {
+    @Doc
+    fun `should not return a used port after freeing one`() {
         // GIVEN
         val portStore = PortStore()
 
