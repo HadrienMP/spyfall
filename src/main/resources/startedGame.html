@@ -5,5 +5,8 @@
 <p class="registered">La partie est démarrée.</p>
 <p id="numberOfPlayers">{{ number_of_players }} joueurs</p>
 <p id="card">{{ card }}</p>
+<form action="/game/stop" method="post">
+    <button type="submit" id="stop">Arrêter le jeu</button>
+</form>
 
 {% endblock %}

@@ -19,7 +19,13 @@ class TestServer {
 
     init { app.start() }
 
+    fun stop() {
+        app.stop()
+        portStore.free(port)
+    }
+
     fun getGamePage() = getGamePage(null)
+
     fun getGamePage(playerId: String?): Document {
         val gamePageResponse = getGamePageResponse(playerId)
 
@@ -55,8 +61,10 @@ class TestServer {
                 .body()
     }
 
-    fun stop() {
-        app.stop()
-        portStore.free(port)
+    fun stopGame() {
+        JdkRequest("$serverUrl/game/stop")
+                .method(Request.POST)
+                .fetch()
+                .body()
     }
 }

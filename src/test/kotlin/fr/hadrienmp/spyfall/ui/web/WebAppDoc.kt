@@ -1,9 +1,6 @@
 package fr.hadrienmp.spyfall.ui.web
 
-import fr.hadrienmp.spyfall.ui.web.testutils.ServerDocTemplate
-import fr.hadrienmp.spyfall.ui.web.testutils.containsPlayers
-import fr.hadrienmp.spyfall.ui.web.testutils.displaysRegistered
-import fr.hadrienmp.spyfall.ui.web.testutils.gameStarted
+import fr.hadrienmp.spyfall.ui.web.testutils.*
 import fr.hadrienmp.testutils.Doc
 
 class WebAppDoc : ServerDocTemplate() {
@@ -17,13 +14,34 @@ class WebAppDoc : ServerDocTemplate() {
     }
 
     @Doc
-    fun `should start a game`() {
+    fun `a game can be started`() {
         app.register("anId")
         app.startGame()
 
         val gamePage = app.getGamePage()
 
-        gamePage.gameStarted()
+        gamePage.gameStarted(true)
+    }
+
+    @Doc
+    fun `a started game has a stop button`() {
+        app.register("anId")
+        app.startGame()
+        app.getGamePage().displaysStopButton()
+    }
+
+    @Doc
+    fun `stopping a game displays the registration page`() {
+        val playerId = "anId"
+        app.register(playerId)
+        app.startGame()
+        app.stopGame()
+
+        val gamePage = app.getGamePage(playerId)
+
+        gamePage.displaysRegistered(false)
+        gamePage.containsPlayers(0)
+        gamePage.gameStarted(false)
     }
 }
 

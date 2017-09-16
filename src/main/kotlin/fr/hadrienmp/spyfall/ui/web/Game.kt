@@ -28,4 +28,9 @@ class Game {
             }
         }
     }
+
+    fun reset() {
+        players.clear()
+        deck = null
+    }
 }

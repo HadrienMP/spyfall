@@ -32,6 +32,11 @@ fun routes(app: Javalin, game: Game) {
         it.redirect(gameUrl)
     }
 
+    app.post("/game/stop") {
+        game.reset()
+        it.redirect(gameUrl)
+    }
+
     app.post("/player/register") {
         val playerId = it.formParam("id")
         if (playerId == null || playerId.isBlank()) {

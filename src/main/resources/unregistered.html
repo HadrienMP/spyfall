@@ -1,5 +1,11 @@
 {% extends "base.html" %}
+
+{% block header %}
+<meta http-equiv="refresh" content="5">
+{% endblock %}
+
 {% block bodyClass %} unregistered {% endblock %}
+
 {% block content %}
 
 <p id="numberOfPlayers">{{ number_of_players }} joueurs</p>
