@@ -18,10 +18,10 @@ class CardDoc : ServerDocTemplate() {
 
     @Doc
     fun `when a player is alone in the game he is the spy`() {
-        app.register("a player")
+        val playerId = app.register()
         app.startGame()
 
-        val gamePage = app.getGamePage("a player")
+        val gamePage = app.getGamePage(playerId)
 
         assertThat(gamePage.card()).contains("espion")
     }

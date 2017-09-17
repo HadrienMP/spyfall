@@ -7,12 +7,6 @@
 {% block bodyClass %} registered {% endblock %}
 {% block content %}
 
-<p id="numberOfPlayers">{{ number_of_players }} joueurs</p>
-
-<p>Je participe</p>
-
-<form class="registered" action="/game/start" method="post" id="start">
-    <button type="submit">Démarrer la partie</button>
-</form>
+{% include fragments/registered.html %}
 
 {% endblock %}

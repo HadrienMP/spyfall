@@ -17,8 +17,6 @@ class TestServer {
     private val app = App(port, Game())
     private val serverUrl = "http://localhost:${port.value}"
 
-    init { app.start() }
-
     fun stop() {
         app.stop()
         portStore.free(port)
@@ -45,13 +43,12 @@ class TestServer {
         return gamePageResponse
     }
 
-    fun register(playerId: String): Response {
-        return JdkRequest("$serverUrl/player/register")
+    fun register(): String {
+        val response = JdkRequest("$serverUrl/player/register")
                 .method(Request.POST)
-                .body()
-                .formParam("id", playerId)
-                .back()
                 .fetch()
+        val setCookies = response.headers()[HttpHeaders.SET_COOKIE].orEmpty()
+        return PlayerIdCookie.from(setCookies).id
     }
 
     fun startGame() {

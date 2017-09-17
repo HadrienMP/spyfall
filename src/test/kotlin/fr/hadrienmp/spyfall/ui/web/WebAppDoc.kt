@@ -15,7 +15,7 @@ class WebAppDoc : ServerDocTemplate() {
 
     @Doc
     fun `a game can be started`() {
-        app.register("anId")
+        app.register()
         app.startGame()
 
         val gamePage = app.getGamePage()
@@ -25,7 +25,7 @@ class WebAppDoc : ServerDocTemplate() {
 
     @Doc
     fun `a started game has a stop button`() {
-        app.register("anId")
+        app.register()
         app.startGame()
         app.getGamePage().displaysStopButton()
     }
@@ -33,7 +33,7 @@ class WebAppDoc : ServerDocTemplate() {
     @Doc
     fun `stopping a game displays the registration page`() {
         val playerId = "anId"
-        app.register(playerId)
+        app.register()
         app.startGame()
         app.stopGame()
 
